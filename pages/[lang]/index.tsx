@@ -1,14 +1,12 @@
-import React from 'react'
-import Layout from '../../components/Layout'
-import Painting from '../../components/Painting'
-import withLocale from '../../hocs/withLocale'
 
-const IndexPage: React.FC = () => {
-  return (
-    <Layout titleKey="notAPipe">
-      <Painting />
-    </Layout>
-  )
+import 'isomorphic-fetch';
+import React from 'react';
+import withLocale from '../../hocs/withLocale';
+import Todo from '../../components/Todo';
+
+function Index() {
+	return <Todo />
+
 }
 
-export default withLocale(IndexPage)
+export default withLocale(Index);

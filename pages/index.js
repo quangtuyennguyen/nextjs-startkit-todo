@@ -1,11 +1,13 @@
-import React from 'react'
+
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { getInitialLocale } from '../translations/getInitialLocale'
 
-const Index: React.FC = () => {
-  React.useEffect(() => {
+function Index(){
+  useEffect(() => {
     window.location.replace(`/${getInitialLocale()}`)
-  })
+  });
+  
   return (
     <Head>
       <meta name="robots" content="noindex, nofollow" />
@@ -13,4 +15,4 @@ const Index: React.FC = () => {
   )
 }
 
-export default Index
+export default Index;

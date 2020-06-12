@@ -1,26 +1,20 @@
-import React from 'react'
-import { NextPage } from 'next'
-import Error from 'next/error'
-import { getDisplayName } from 'next/dist/next-server/lib/utils'
-import { isLocale, Locale } from '../translations/types'
-import { LocaleProvider } from '../context/LocaleContext'
 
+import { NextPage } from 'next'
+import { getDisplayName } from 'next/dist/next-server/lib/utils'
+import React from 'react'
+import { LocaleProvider } from '../context/LocaleContext'
+import { isLocale, Locale } from '../translations/types'
 interface LangProps {
   locale?: Locale
 }
-
 export default (WrappedPage: NextPage<any>) => {
   const WithLocale: NextPage<any, LangProps> = ({ locale, ...pageProps }) => {
-    if (!locale) {
-      return <Error statusCode={404} />
-    }
     return (
       <LocaleProvider lang={locale}>
         <WrappedPage {...pageProps} />
       </LocaleProvider>
     )
   }
-
   WithLocale.getInitialProps = async ctx => {
     let pageProps = {}
     if (WrappedPage.getInitialProps) {
@@ -31,8 +25,6 @@ export default (WrappedPage: NextPage<any>) => {
     }
     return { ...pageProps, locale: ctx.query.lang }
   }
-
   WithLocale.displayName = `withLang(${getDisplayName(WrappedPage)})`
-
   return WithLocale
 }
